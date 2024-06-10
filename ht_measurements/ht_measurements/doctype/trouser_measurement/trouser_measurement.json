@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-10 19:09:38.378202",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "measurements_section",
+  "invoice",
+  "knee_length",
+  "full_length",
+  "inseam",
+  "waist",
+  "column_break_ckez",
+  "hip",
+  "thigh_loose",
+  "knee_loose",
+  "bottom_hem",
+  "u_round"
+ ],
+ "fields": [
+  {
+   "fieldname": "measurements_section",
+   "fieldtype": "Section Break",
+   "label": "Measurements"
+  },
+  {
+   "fieldname": "knee_length",
+   "fieldtype": "Float",
+   "label": "Knee Length"
+  },
+  {
+   "fieldname": "full_length",
+   "fieldtype": "Float",
+   "label": "Full Length"
+  },
+  {
+   "fieldname": "inseam",
+   "fieldtype": "Float",
+   "label": "Inseam"
+  },
+  {
+   "fieldname": "waist",
+   "fieldtype": "Float",
+   "label": "Waist"
+  },
+  {
+   "fieldname": "column_break_ckez",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hip",
+   "fieldtype": "Float",
+   "label": "Hip"
+  },
+  {
+   "fieldname": "thigh_loose",
+   "fieldtype": "Float",
+   "label": "Thigh Loose"
+  },
+  {
+   "fieldname": "knee_loose",
+   "fieldtype": "Float",
+   "label": "knee Loose"
+  },
+  {
+   "fieldname": "bottom_hem",
+   "fieldtype": "Float",
+   "label": "Bottom hem"
+  },
+  {
+   "fieldname": "u_round",
+   "fieldtype": "Float",
+   "label": "U Round"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice",
+   "options": "HT Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-10 19:20:37.534242",
+ "modified_by": "Administrator",
+ "module": "Ht Measurements",
+ "name": "Trouser Measurement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

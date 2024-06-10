@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-10 19:02:04.491674",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "shirt_measurements_section",
+  "invoice",
+  "full_length",
+  "shoulder",
+  "arm_hole",
+  "sleeve",
+  "bicep",
+  "chest",
+  "lower_chest",
+  "column_break_tpnv",
+  "stomach",
+  "hip",
+  "collar",
+  "cross_back",
+  "jacket_length",
+  "jacket_sleeve",
+  "remarks_section",
+  "add_your_suggestions_and_remarks_here"
+ ],
+ "fields": [
+  {
+   "fieldname": "shirt_measurements_section",
+   "fieldtype": "Section Break",
+   "label": "Shirt Measurements"
+  },
+  {
+   "fieldname": "full_length",
+   "fieldtype": "Float",
+   "label": "Full Length"
+  },
+  {
+   "fieldname": "shoulder",
+   "fieldtype": "Float",
+   "label": "Shoulder"
+  },
+  {
+   "fieldname": "arm_hole",
+   "fieldtype": "Float",
+   "label": "Arm Hole"
+  },
+  {
+   "fieldname": "sleeve",
+   "fieldtype": "Float",
+   "label": "Sleeve"
+  },
+  {
+   "fieldname": "bicep",
+   "fieldtype": "Float",
+   "label": "Bicep"
+  },
+  {
+   "fieldname": "chest",
+   "fieldtype": "Float",
+   "label": "Chest"
+  },
+  {
+   "fieldname": "lower_chest",
+   "fieldtype": "Float",
+   "label": "Lower Chest"
+  },
+  {
+   "fieldname": "column_break_tpnv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stomach",
+   "fieldtype": "Float",
+   "label": "Stomach"
+  },
+  {
+   "fieldname": "hip",
+   "fieldtype": "Float",
+   "label": "Hip"
+  },
+  {
+   "fieldname": "collar",
+   "fieldtype": "Float",
+   "label": "Collar"
+  },
+  {
+   "fieldname": "cross_back",
+   "fieldtype": "Float",
+   "label": "Cross Back"
+  },
+  {
+   "fieldname": "jacket_length",
+   "fieldtype": "Float",
+   "label": "Jacket Length"
+  },
+  {
+   "fieldname": "jacket_sleeve",
+   "fieldtype": "Float",
+   "label": "Jacket Sleeve"
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "add_your_suggestions_and_remarks_here",
+   "fieldtype": "Text Editor",
+   "label": "Add your suggestions and remarks here"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice",
+   "options": "HT Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-10 19:21:16.283820",
+ "modified_by": "Administrator",
+ "module": "Ht Measurements",
+ "name": "Shirt Measurement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
