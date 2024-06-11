@@ -1,28 +1,37 @@
 {% extends "templates/web.html" %}
 
-{% block title %}{{ _("Measurement Portal") }}{% endblock %}
 
 
 {% block script %}
 <script src="index.js"></script>
 {% endblock %}
 
-
 {% block page_content %}
-<h1>{{ _("Measurement Portal") }}</h1>
-<div id="form-container">
-    <div>
-        <h2>Select Store</h2>
-        <form id="store-selection-form">
-            <label for="store">Store:</label>
-            <select id="store" name="store">
-                {% for store in stores %}
-                    <option value="{{ store.name }}">{{ store.name }}</option>
-                {% endfor %}
-            </select>
-            <button type="submit">Next</button>
-        </form>
+<style>
+{% include "templates/styles/card_style.css" %}
+</style>
+<div class='page-card'>
+    <h5 class='page-card-head'>
+        <span class='indicator blue'>
+            {{ _("Measurement Portal") }}</span>
+    </h5>
+    <div class="page-card-body">
+        <div id="form-container">
+            <div>
+                <h2>{{ _("Select Store") }}</h2>
+                <form id="store-selection-form">
+                    <div class="form-group">
+                        <label for="store">{{ _("Store:") }}</label>
+                        <select id="store" name="store" class="form-control">
+                            {% for store in stores %}
+                                <option value="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ _("Next") }}</button>
+                </form>
+            </div>
+        </div>
     </div>
-    
 </div>
 {% endblock %}

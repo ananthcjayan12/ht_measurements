@@ -1,0 +1,108 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Shirt Measurement Form") }}{% endblock %}
+
+{% block page_content %}
+<style>
+{% include "templates/styles/card_style.css" %}
+.page-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
+</style>
+<div class='page-card'>
+    <h5 class='page-card-head'>
+        <span class='indicator blue'>
+            {{ _("Shirt Measurement Form") }}</span>
+    </h5>
+    <div class="page-card-body">
+        <div id="form-container">
+            <form id="shirt-measurement-form">
+                <input type="hidden" id="invoice" name="invoice" value="{{ invoice_number }}" readonly>
+                
+                <h2>{{ _("Shirt Measurements") }}</h2>
+                
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="full_length">{{ _("Full Length") }}:</label>
+                        <input type="number" step="0.01" id="full_length" name="full_length" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="shoulder">{{ _("Shoulder") }}:</label>
+                        <input type="number" step="0.01" id="shoulder" name="shoulder" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="arm_hole">{{ _("Arm Hole") }}:</label>
+                        <input type="number" step="0.01" id="arm_hole" name="arm_hole" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="sleeve">{{ _("Sleeve") }}:</label>
+                        <input type="number" step="0.01" id="sleeve" name="sleeve" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="bicep">{{ _("Bicep") }}:</label>
+                        <input type="number" step="0.01" id="bicep" name="bicep" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="chest">{{ _("Chest") }}:</label>
+                        <input type="number" step="0.01" id="chest" name="chest" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="lower_chest">{{ _("Lower Chest") }}:</label>
+                        <input type="number" step="0.01" id="lower_chest" name="lower_chest" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="stomach">{{ _("Stomach") }}:</label>
+                        <input type="number" step="0.01" id="stomach" name="stomach" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="hip">{{ _("Hip") }}:</label>
+                        <input type="number" step="0.01" id="hip" name="hip" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="collar">{{ _("Collar") }}:</label>
+                        <input type="number" step="0.01" id="collar" name="collar" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="cross_back">{{ _("Cross Back") }}:</label>
+                        <input type="number" step="0.01" id="cross_back" name="cross_back" class="form-control" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="jacket_length">{{ _("Jacket Length") }}:</label>
+                        <input type="number" step="0.01" id="jacket_length" name="jacket_length" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jacket_sleeve">{{ _("Jacket Sleeve") }}:</label>
+                    <input type="number" step="0.01" id="jacket_sleeve" name="jacket_sleeve" class="form-control" required>
+                </div>
+
+                <h2>{{ _("Remarks") }}</h2>
+
+                <div class="form-group">
+                    <label for="add_your_suggestions_and_remarks_here">{{ _("Add your suggestions and remarks here") }}:</label>
+                    <textarea id="add_your_suggestions_and_remarks_here" name="add_your_suggestions_and_remarks_here" class="form-control" placeholder="{{ _("Enter any additional remarks or suggestions") }}"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">{{ _("Next") }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

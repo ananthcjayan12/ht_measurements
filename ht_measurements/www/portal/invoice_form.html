@@ -3,35 +3,57 @@
 {% block title %}{{ _("Invoice Form") }}{% endblock %}
 
 {% block page_content %}
-<h1>{{ _("Invoice Form") }}</h1>
-<div id="form-container">
-    <form id="invoice-form">
-        <input type="hidden" id="store" name="store" value="{{ store }}">
-        
-        <label for="name1">Name:</label>
-        <input type="text" id="name1" name="name1" required>
+<style>
+{% include "templates/styles/card_style.css" %}
+</style>
+<div class='page-card'>
+    <h5 class='page-card-head'>
+        <span class='indicator blue'>
+            {{ _("Invoice Form") }}</span>
+    </h5>
+    <div class="page-card-body">
+        <div id="form-container">
+            <form id="invoice-form">
+                <input type="hidden" id="store" name="store" value="{{ store }}">
+                
+                <div class="form-group">
+                    <label for="name1">{{ _("Name:") }}</label>
+                    <input type="text" id="name1" name="name1" class="form-control" required>
+                </div>
 
-        <label for="delivery_date">Delivery Date:</label>
-        <input type="date" id="delivery_date" name="delivery_date" required>
+                <div class="form-group">
+                    <label for="delivery_date">{{ _("Delivery Date:") }}</label>
+                    <input type="date" id="delivery_date" name="delivery_date" class="form-control" required>
+                </div>
 
-        <label for="invoice_number">Invoice Number:</label>
-        <input type="text" id="invoice_number" name="invoice_number" required>
+                <div class="form-group">
+                    <label for="invoice_number">{{ _("Invoice Number:") }}</label>
+                    <input type="text" id="invoice_number" name="invoice_number" class="form-control" required>
+                </div>
 
-        <label for="trial_date">Trial Date:</label>
-        <input type="date" id="trial_date" name="trial_date" required>
+                <div class="form-group">
+                    <label for="trial_date">{{ _("Trial Date:") }}</label>
+                    <input type="date" id="trial_date" name="trial_date" class="form-control" required>
+                </div>
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Transgender">Transgender</option>
-            <option value="Others">Others</option>
-        </select>
+                <div class="form-group">
+                    <label for="gender">{{ _("Gender:") }}</label>
+                    <select id="gender" name="gender" class="form-control" required>
+                        <option value="Male">{{ _("Male") }}</option>
+                        <option value="Female">{{ _("Female") }}</option>
+                        <option value="Transgender">{{ _("Transgender") }}</option>
+                        <option value="Others">{{ _("Others") }}</option>
+                    </select>
+                </div>
 
-        <label for="store">Store:</label>
-        <input type="text" id="store" name="store" value="{{ store }}" readonly>
+                <div class="form-group">
+                    <label for="store">{{ _("Store:") }}</label>
+                    <input type="text" id="store" name="store" class="form-control" value="{{ store }}" readonly>
+                </div>
 
-        <button type="submit">Next</button>
-    </form>
+                <button type="submit" class="btn btn-primary">{{ _("Next") }}</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

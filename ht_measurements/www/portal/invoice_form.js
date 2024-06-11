@@ -21,7 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             },
             callback: function (r) {
-                window.location.href = `/portal/shirt_measurement?invoice_number=${r.message.invoice_number}`;
+                if (r.message) {
+                    console.log("Shirt measurements saved successfully.");
+                    window.location.href = `/portal/shirt_measurements?invoice_number=${r.message.invoice_number}`;
+                } else {
+                    console.log(r)
+                    console.log("There was an error saving the measurements. Please try again.");
+                }
+               
             }
         });
     });

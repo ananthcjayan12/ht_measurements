@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:INV-{DD}{MM}{YY}-{###}",
+ "autoname": "format:{invoice_number}",
  "creation": "2024-06-10 18:51:54.351371",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -32,7 +32,10 @@
   {
    "fieldname": "invoice_number",
    "fieldtype": "Data",
-   "label": "Invoice Number"
+   "in_list_view": 1,
+   "label": "Invoice Number",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "trial_date",
@@ -54,7 +57,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-10 23:12:46.209654",
+ "modified": "2024-06-11 13:33:48.663160",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Invoice",
