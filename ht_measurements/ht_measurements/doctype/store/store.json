@@ -29,7 +29,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-10 18:50:01.664227",
+ "modified": "2024-06-10 23:49:32.103125",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Store",
@@ -44,7 +44,8 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "Administrator",
+   "select": 1,
    "share": 1,
    "write": 1
   }

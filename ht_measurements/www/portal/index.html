@@ -1,0 +1,28 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Measurement Portal") }}{% endblock %}
+
+
+{% block script %}
+<script src="index.js"></script>
+{% endblock %}
+
+
+{% block page_content %}
+<h1>{{ _("Measurement Portal") }}</h1>
+<div id="form-container">
+    <div>
+        <h2>Select Store</h2>
+        <form id="store-selection-form">
+            <label for="store">Store:</label>
+            <select id="store" name="store">
+                {% for store in stores %}
+                    <option value="{{ store.name }}">{{ store.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Next</button>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}
