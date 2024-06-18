@@ -1,0 +1,15 @@
+/* custom_app_name/public/css/custom.css */
+
+.form-page {
+    background-color: #070707;
+}
+
+.form-control {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
