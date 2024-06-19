@@ -1,20 +1,30 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:HT_ORD_{invoice}",
  "creation": "2024-06-10 23:20:12.964473",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "invoice",
+  "select_store_section",
   "store",
-  "shirt_measurement"
+  "section_break_tjwy",
+  "invoice",
+  "add_new_invoice",
+  "measurement_section_tab",
+  "shirt_measurement_section",
+  "shirt_measurement",
+  "shirt_measurement_button",
+  "styling_section_tab"
  ],
  "fields": [
   {
    "fieldname": "invoice",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Invoice",
-   "options": "HT Invoice"
+   "options": "HT Invoice",
+   "read_only": 1
   },
   {
    "fieldname": "store",
@@ -23,18 +33,56 @@
    "options": "Store"
   },
   {
+   "fieldname": "section_break_tjwy",
+   "fieldtype": "Section Break",
+   "label": "Invoice Section"
+  },
+  {
+   "default": "dfdfdf",
+   "fieldname": "add_new_invoice",
+   "fieldtype": "HTML",
+   "label": "add_new_invoice"
+  },
+  {
+   "fieldname": "select_store_section",
+   "fieldtype": "Section Break",
+   "label": "Select Store"
+  },
+  {
+   "fieldname": "measurement_section_tab",
+   "fieldtype": "Tab Break",
+   "label": "Measurement Section"
+  },
+  {
+   "fieldname": "shirt_measurement_section",
+   "fieldtype": "Section Break",
+   "label": "Shirt Measurement"
+  },
+  {
    "fieldname": "shirt_measurement",
-   "fieldtype": "Table",
+   "fieldtype": "Link",
    "label": "Shirt Measurement",
    "options": "Shirt Measurement"
+  },
+  {
+   "fieldname": "shirt_measurement_button",
+   "fieldtype": "HTML",
+   "label": "shirt_measurement_button"
+  },
+  {
+   "fieldname": "styling_section_tab",
+   "fieldtype": "Tab Break",
+   "label": "Styling Section"
   }
  ],
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-10 23:26:18.831328",
+ "modified": "2024-06-18 15:48:48.080718",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Order Submit",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -50,6 +98,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

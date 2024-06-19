@@ -4,6 +4,7 @@ app_publisher = "ananthcjayan12"
 app_description = "App designed to help the house of tailors in the automation of their measurements"
 app_email = "ananthcjayan@gmail.com"
 app_license = "mit"
+app_include_css = "/assets/ht_measurements/css/custom.css"
 # required_apps = []
 
 # Includes in <head>

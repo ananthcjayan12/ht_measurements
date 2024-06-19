@@ -1,0 +1,36 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Select Store") }}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/css/store_selection.css">
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h5 class="card-title text-center">{{ _("Select Store") }}</h5>
+        <div id="store-selection-container" class="mt-4">
+            {% for store in stores %}
+                <button class="btn btn-store btn-block mb-3" data-store="{{ store.name }}">{{ store.name }}</button>
+            {% endfor %}
+            <button class="btn btn-store btn-block mb-3" id="add-new-store">{{ _("Add New Store") }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-store").forEach(button => {
+        button.addEventListener("click", function () {
+            const storeName = this.getAttribute("data-store");
+            const action = new URLSearchParams(window.location.search).get('action');
+            window.location.href = `/ht_app/customer_details?store=${storeName}&action=${action}`;
+        });
+    });
+
+    document.getElementById("add-new-store").addEventListener("click", function () {
+        window.location.href = `/ht_app/add_new_store`;
+    });
+});
+</script>
+{% endblock %}
