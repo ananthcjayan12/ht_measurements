@@ -1,0 +1,142 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Select Store") }}{% endblock %}
+
+{% block page_content %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f4;
+}
+
+.page-card {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.15), 0 4px 8px rgba(60, 64, 67, 0.15);
+}
+
+.page-card-head {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 20px;
+}
+
+.store-button {
+    width: calc(50% - 10px);
+    margin: 5px;
+    padding: 20px 15px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #4285f4;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+.store-button:hover {
+    background-color: #3367d6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#store-selection-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#search-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#search-input {
+    width: 70%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 24px;
+    border: 1px solid #dfe1e5;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.15);
+    margin-right: 10px;
+}
+
+#search-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 24px;
+    background-color: #34a853;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#search-btn:hover {
+    background-color: #0f9d58;
+}
+
+#next-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 24px;
+    background-color: #fbbc05;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+#next-btn:hover {
+    background-color: #e37400;
+}
+
+.store-button:nth-child(1) {
+    background-color: #ea4335;
+}
+
+.store-button:nth-child(2) {
+    background-color: #fbbc05;
+}
+
+.store-button:nth-child(3) {
+    background-color: #34a853;
+}
+
+.store-button:nth-child(4) {
+    background-color: #4285f4;
+}
+</style>
+<div class="page-card">
+    <h5 class="page-card-head">
+        <span class="indicator blue">{{ _("Select Store") }}</span>
+    </h5>
+    <div class="page-card-body">
+        <div id="store-selection-container">
+            {% for store in stores %}
+                <button class="store-button" data-store="{{ store.name }}">{{ store.name }}</button>
+            {% endfor %}
+            <button class="store-button" id="add-new-store">{{ _("Add New Store") }}</button>
+        </div>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="{{ _('Name, Invoice Number') }}">
+            <button id="search-btn">{{ _("Search") }}</button>
+        </div>
+        <button id="next-btn">{{ _("Next >>") }}</button>
+    </div>
+</div>
+{% endblock %}
