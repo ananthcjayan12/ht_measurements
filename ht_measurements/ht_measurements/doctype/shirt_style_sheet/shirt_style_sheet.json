@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-19 10:20:39.494252",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "style_form_id",
+  "quantity",
+  "fabric_swatch",
+  "lining_swatch",
+  "buttons_code",
+  "section_break_suuu",
+  "shirt_fit",
+  "front_pockets",
+  "black_dart",
+  "name_embroidery",
+  "collar_size",
+  "column_break_sasa",
+  "collar_style",
+  "front_placket",
+  "cuff_style",
+  "cuff_size"
+ ],
+ "fields": [
+  {
+   "fieldname": "style_form_id",
+   "fieldtype": "Data",
+   "label": "Style Form ID"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "fabric_swatch",
+   "fieldtype": "Data",
+   "label": "Fabric Swatch"
+  },
+  {
+   "fieldname": "lining_swatch",
+   "fieldtype": "Data",
+   "label": "Lining Swatch"
+  },
+  {
+   "fieldname": "buttons_code",
+   "fieldtype": "Data",
+   "label": "Buttons Code"
+  },
+  {
+   "fieldname": "section_break_suuu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "shirt_fit",
+   "fieldtype": "Select",
+   "label": "Shirt Fit",
+   "options": "Comfort\nSlim"
+  },
+  {
+   "fieldname": "front_pockets",
+   "fieldtype": "Select",
+   "label": "Front Pockets",
+   "options": "Single\nDouble\nNo Pocket"
+  },
+  {
+   "fieldname": "column_break_sasa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "collar_style",
+   "fieldtype": "Select",
+   "label": "Collar Style",
+   "options": "Regular\nSemi Cut Way\nFull Cut Way\nTux Wing"
+  },
+  {
+   "fieldname": "front_placket",
+   "fieldtype": "Select",
+   "label": "Front Placket",
+   "options": "With Placket\nInvisible Buttons\nNo Placket\nTux Pleats"
+  },
+  {
+   "fieldname": "black_dart",
+   "fieldtype": "Select",
+   "label": "Black Dart",
+   "options": "Dart\nCenter Box\nSide Pleats\nNone"
+  },
+  {
+   "fieldname": "name_embroidery",
+   "fieldtype": "Select",
+   "label": "Name Embroidery",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "collar_size",
+   "fieldtype": "Select",
+   "label": "Collar Size",
+   "options": "Point Size\nStand Size"
+  },
+  {
+   "fieldname": "cuff_style",
+   "fieldtype": "Data",
+   "label": "Cuff Style",
+   "options": "One Button\nTwo Button\nFrench Cuff\n"
+  },
+  {
+   "fieldname": "cuff_size",
+   "fieldtype": "Select",
+   "label": "Cuff Size",
+   "options": "Left\nRight\nRegular"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-19 10:33:10.038486",
+ "modified_by": "Administrator",
+ "module": "Ht Measurements",
+ "name": "Shirt Style Sheet",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
