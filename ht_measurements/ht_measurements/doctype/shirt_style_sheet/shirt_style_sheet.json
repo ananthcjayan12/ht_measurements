@@ -1,12 +1,16 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:SH_ST {invoice}",
  "creation": "2024-06-19 10:20:39.494252",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "details_section",
   "style_form_id",
+  "invoice",
   "quantity",
+  "column_break_vthx",
   "fabric_swatch",
   "lining_swatch",
   "buttons_code",
@@ -20,7 +24,8 @@
   "collar_style",
   "front_placket",
   "cuff_style",
-  "cuff_size"
+  "cuff_size",
+  "amended_from"
  ],
  "fields": [
   {
@@ -50,7 +55,8 @@
   },
   {
    "fieldname": "section_break_suuu",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Styling"
   },
   {
    "fieldname": "shirt_fit",
@@ -109,14 +115,42 @@
    "fieldtype": "Select",
    "label": "Cuff Size",
    "options": "Left\nRight\nRegular"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice Number",
+   "options": "HT Invoice",
+   "unique": 1
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "column_break_vthx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shirt Style Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-06-19 10:33:10.038486",
+ "modified": "2024-06-20 02:20:17.766427",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Shirt Style Sheet",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

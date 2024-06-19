@@ -1,16 +1,28 @@
 {% extends "templates/web.html" %}
 
-{% block title %}{{ _("Measurements") }}{% endblock %}
+{% block title %}{{ _("Styles") }}{% endblock %}
 
 {% block page_content %}
-<link rel="stylesheet" href="/assets/css/measurements.css">
+<link rel="stylesheet" href="/assets/css/styles.css">
 <div class="container mt-5">
     <div class="card shadow-lg p-4">
-        <h5 class="card-title text-center">{{ _("Measurements") }}</h5>
+        <h5 class="card-title text-center">{{ _("Styles") }}</h5>
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     <span class="badge badge-dark badge-pill mr-2">1</span>
+                    {{ _("Jacket") }}
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm mr-2 view-btn" data-type="jacket">{{ _("View") }}</button>
+                    {% if jacket_completed %}
+                        <span class="badge badge-success">✔</span>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge badge-dark badge-pill mr-2">2</span>
                     {{ _("Shirt") }}
                 </div>
                 <div>
@@ -22,20 +34,17 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
-                    <span class="badge badge-dark badge-pill mr-2">2</span>
-                    {{ _("Trousers") }}
+                    <span class="badge badge-dark badge-pill mr-2">3</span>
+                    {{ _("Trouser") }}
                 </div>
                 <div>
-                    <button class="btn btn-primary btn-sm mr-2 view-btn" data-type="trousers">{{ _("View") }}</button>
-                    {% if trousers_completed %}
+                    <button class="btn btn-primary btn-sm mr-2 view-btn" data-type="trouser">{{ _("View") }}</button>
+                    {% if trouser_completed %}
                         <span class="badge badge-success">✔</span>
                     {% endif %}
                 </div>
             </li>
         </ul>
-        <div class="text-center mt-4">
-            <button class="btn btn-secondary" id="go-to-style-sheet">{{ _("Go to Style Sheet") }}</button>
-        </div>
     </div>
 </div>
 {% endblock %}
@@ -47,13 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             const type = this.getAttribute("data-type");
             const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-            window.location.href = `/ht_app/${type}_measurement?invoice_number=${invoiceNumber}`;
+            window.location.href = `/ht_app/${type}_style?invoice_number=${invoiceNumber}`;
         });
-    });
-
-    document.getElementById("go-to-style-sheet").addEventListener("click", function () {
-        const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-        window.location.href = `/ht_app/style_sheet?invoice_number=${invoiceNumber}`;
     });
 });
 </script>
