@@ -1,0 +1,203 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Jacket Style") }}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/css/jacket_style.css">
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h5 class="card-title text-center">{{ _("Jacket Style Details") }}</h5>
+        <form id="jacket-style-form">
+            <!-- <div class="form-group">
+                <label for="style_form_id">{{ _("Style Form ID:") }}</label>
+                <input type="text" id="style_form_id" name="style_form_id" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="invoice">{{ _("Invoice Number:") }}</label>
+                <input type="text" id="invoice" name="invoice" class="form-control" required>
+            </div> -->
+            <div class="form-group">
+                <label for="fabric_swatch">{{ _("Fabric Swatch:") }}</label>
+                <input type="text" id="fabric_swatch" name="fabric_swatch" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lining_swatch">{{ _("Lining Swatch:") }}</label>
+                <input type="text" id="lining_swatch" name="lining_swatch" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="button_code">{{ _("Button Code:") }}</label>
+                <input type="text" id="button_code" name="button_code" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="jacket">{{ _("Jacket:") }}</label>
+                <select id="jacket" name="jacket" class="form-control">
+                    <option value="Single Breasted">{{ _("Single Breasted") }}</option>
+                    <option value="Double Breasted">{{ _("Double Breasted") }}</option>
+                    <option value="Band Gala">{{ _("Band Gala") }}</option>
+                    <option value="Bundy">{{ _("Bundy") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="number_of_buttons">{{ _("Number of Buttons:") }}</label>
+                <select id="number_of_buttons" name="number_of_buttons" class="form-control">
+                    <option value="1 Button">{{ _("1 Button") }}</option>
+                    <option value="2 Buttons">{{ _("2 Buttons") }}</option>
+                    <option value="3 Buttons">{{ _("3 Buttons") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="front_pockets">{{ _("Front Pockets:") }}</label>
+                <select id="front_pockets" name="front_pockets" class="form-control">
+                    <option value="Straight">{{ _("Straight") }}</option>
+                    <option value="Slanting">{{ _("Slanting") }}</option>
+                    <option value="With Ticket">{{ _("With Ticket") }}</option>
+                </select>
+            </div>
+            <h5 class="card-title text-center mt-4">{{ _("Styling") }}</h5>
+            <div class="form-group">
+                <label for="lapel_pin_hole">{{ _("Lapel Pin Hole:") }}</label>
+                <select id="lapel_pin_hole" name="lapel_pin_hole" class="form-control">
+                    <option value="Show">{{ _("Show") }}</option>
+                    <option value="With Hole">{{ _("With Hole") }}</option>
+                    <option value="None">{{ _("None") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="lapel">{{ _("Lapel:") }}</label>
+                <select id="lapel" name="lapel" class="form-control">
+                    <option value="Notch">{{ _("Notch") }}</option>
+                    <option value="Peak">{{ _("Peak") }}</option>
+                    <option value="Shawl">{{ _("Shawl") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="back_vent_open">{{ _("Back Vent Open:") }}</label>
+                <select id="back_vent_open" name="back_vent_open" class="form-control">
+                    <option value="Side Vent">{{ _("Side Vent") }}</option>
+                    <option value="Center Vent">{{ _("Center Vent") }}</option>
+                    <option value="No Vent">{{ _("No Vent") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inside_fashion">{{ _("Inside Fashion:") }}</label>
+                <select id="inside_fashion" name="inside_fashion" class="form-control">
+                    <option value="Straight">{{ _("Straight") }}</option>
+                    <option value="Takurdwara">{{ _("Takurdwara") }}</option>
+                    <option value="Piping">{{ _("Piping") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inside_pockets">{{ _("Inside Pockets:") }}</label>
+                <select id="inside_pockets" name="inside_pockets" class="form-control">
+                    <option value="2 Pocket">{{ _("2 Pockets") }}</option>
+                    <option value="3 Pockets">{{ _("3 Pockets") }}</option>
+                    <option value="4 Pockets">{{ _("4 Pockets") }}</option>
+                    <option value="No Pocket">{{ _("No Pocket") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="extra_pocket">{{ _("Extra Pocket:") }}</label>
+                <select id="extra_pocket" name="extra_pocket" class="form-control">
+                    <option value="Pen Pocket">{{ _("Pen Pocket") }}</option>
+                    <option value="Passport">{{ _("Passport") }}</option>
+                    <option value="None">{{ _("None") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sleeve_buttons">{{ _("Sleeve Buttons:") }}</label>
+                <select id="sleeve_buttons" name="sleeve_buttons" class="form-control">
+                    <option value="3 Buttons">{{ _("3 Buttons") }}</option>
+                    <option value="4 Buttons">{{ _("4 Buttons") }}</option>
+                    <option value="5 Buttons">{{ _("5 Buttons") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pick_stitch">{{ _("Pick Stitch:") }}</label>
+                <select id="pick_stitch" name="pick_stitch" class="form-control">
+                    <option value="Full Pick">{{ _("Full Pick") }}</option>
+                    <option value="Lapel Pick">{{ _("Lapel Pick") }}</option>
+                    <option value="None">{{ _("None") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="others">{{ _("Others:") }}</label>
+                <input type="text" id="others" name="others" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">{{ _("Submit") }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+
+    // Load existing data if available
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Jacket Style Sheet",
+            fields: ["*"],
+            filters: { invoice: invoiceNumber }
+        },
+        callback: function (r) {
+            if (r.message.length > 0) {
+                const data = r.message[0];
+                for (const [key, value] of Object.entries(data)) {
+                    if (document.getElementById(key)) {
+                        document.getElementById(key).value = value;
+                    }
+                }
+            }
+        }
+    });
+
+    document.getElementById("jacket-style-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        data.invoice = invoiceNumber;
+
+        frappe.call({
+            method: "frappe.client.insert",
+            args: {
+                doc: {
+                    doctype: "Jacket Style Sheet",
+                    style_form_id: data.style_form_id,
+                    invoice: data.invoice,
+                    fabric_swatch: data.fabric_swatch,
+                    lining_swatch: data.lining_swatch,
+                    button_code: data.button_code,
+                    jacket: data.jacket,
+                    number_of_buttons: data.number_of_buttons,
+                    front_pockets: data.front_pockets,
+                    lapel_pin_hole: data.lapel_pin_hole,
+                    lapel: data.lapel,
+                    back_vent_open: data.back_vent_open,
+                    inside_fashion: data.inside_fashion,
+                    inside_pockets: data.inside_pockets,
+                    extra_pocket: data.extra_pocket,
+                    sleeve_buttons: data.sleeve_buttons,
+                    pick_stitch: data.pick_stitch,
+                    others: data.others,
+                    docstatus: 1 // Submitting the document
+                }
+            },
+            callback: function (r) {
+                if (r.message) {
+                    alert("Jacket style saved successfully.");
+                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}`;
+                } else {
+                    alert("There was an error saving the jacket style. Please try again.");
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

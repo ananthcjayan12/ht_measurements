@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:JK-ST {invoice}",
  "creation": "2024-06-14 09:43:45.739094",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -58,7 +59,8 @@
    "fieldname": "invoice",
    "fieldtype": "Link",
    "label": "Invoice Number",
-   "options": "HT Invoice"
+   "options": "HT Invoice",
+   "unique": 1
   },
   {
    "fieldname": "fabric_swatch",
@@ -159,10 +161,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-19 10:19:56.953472",
+ "modified": "2024-06-20 02:21:15.661446",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Jacket Style Sheet",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

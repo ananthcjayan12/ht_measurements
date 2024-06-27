@@ -1,9 +1,9 @@
-{% extends "templates/web.html" %}
+{% extends "templates/ht_app_base.html" %}
 
 {% block title %}{{ _("Welcome") }}{% endblock %}
 
 {% block page_content %}
-<link rel="stylesheet" href="/assets/css/initial_screen.css">
+
 <div class="container mt-5">
     <div class="card shadow-lg p-4">
         <h5 class="card-title text-center">{{ _("Welcome to Measurement Portal") }}</h5>
@@ -28,7 +28,7 @@
 document.getElementById("search-btn").addEventListener("click", function () {
     const query = document.getElementById("search-input").value;
     if (query) {
-        window.location.href = `/portal/search_invoice?query=${query}`;
+        window.location.href = `/ht_app/measurements?invoice_number=${query}`;
     }
 });
 </script>

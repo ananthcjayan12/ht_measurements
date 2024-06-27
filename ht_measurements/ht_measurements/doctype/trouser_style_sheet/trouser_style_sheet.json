@@ -1,15 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:TR-ST {invoice}",
  "creation": "2024-06-19 10:33:55.037153",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "details_section",
   "style_form_id",
-  "quantity",
   "fabric_swatch",
+  "quantity",
+  "column_break_ytoi",
+  "invoice",
   "buttons_code",
+  "ht_order",
   "section_break_qwgh",
   "fit",
   "back_pockets",
@@ -22,7 +26,8 @@
   "back_pocket_style",
   "loops",
   "front_pocket",
-  "buttonhook"
+  "buttonhook",
+  "amended_from"
  ],
  "fields": [
   {
@@ -125,14 +130,43 @@
    "fieldname": "details_section",
    "fieldtype": "Section Break",
    "label": "DETAILS"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice Number",
+   "options": "HT Invoice",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_ytoi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Trouser Style Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "ht_order",
+   "fieldtype": "Link",
+   "label": "HT Order",
+   "options": "Ht_Order"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-06-19 10:49:53.389617",
+ "modified": "2024-06-27 10:05:16.810438",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Trouser Style Sheet",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
