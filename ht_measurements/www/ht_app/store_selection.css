@@ -28,18 +28,18 @@ body {
 }
 
 .btn-store:nth-child(1) {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn-store:nth-child(2) {
-    background-color: #6c757d;
-    border-color: #6c757d;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn-store:nth-child(3) {
-    background-color: #28a745;
-    border-color: #28a745;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn-store:nth-child(4) {
@@ -48,6 +48,6 @@ body {
 }
 
 #add-new-store {
-    background-color: #6f42c1;
-    border-color: #6f42c1;
+    background-color: #6c757d;
+    border-color: #6c757d;
 }

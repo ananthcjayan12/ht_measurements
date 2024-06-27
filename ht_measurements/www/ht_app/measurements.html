@@ -5,6 +5,7 @@
 {% block page_content %}
 <link rel="stylesheet" href="/assets/css/measurements.css">
 <div class="container mt-5">
+    {% if is_invoice_exists %}
     <div class="card shadow-lg p-4">
         <h5 class="card-title text-center">{{ _("Measurements") }}</h5>
         <ul class="list-group">
@@ -37,6 +38,11 @@
             <button class="btn btn-secondary" id="go-to-style-sheet">{{ _("Go to Style Sheet") }}</button>
         </div>
     </div>
+    {% else %}
+    <div class="alert alert-danger text-center">
+        {{ no_invoice_message }}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
 
