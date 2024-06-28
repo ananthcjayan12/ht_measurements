@@ -6,20 +6,17 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name1",
-  "delivery_date",
+  "customer_name",
+  "phone_number",
   "gender",
+  "customer",
+  "delivery_date",
   "column_break_trut",
   "invoice_number",
   "trial_date",
   "store"
  ],
  "fields": [
-  {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Name"
-  },
   {
    "fieldname": "delivery_date",
    "fieldtype": "Date",
@@ -43,6 +40,8 @@
    "label": "Trial Date"
   },
   {
+   "fetch_from": "customer.gender",
+   "fetch_if_empty": 1,
    "fieldname": "gender",
    "fieldtype": "Select",
    "label": "Gender",
@@ -53,11 +52,31 @@
    "fieldtype": "Link",
    "label": "Store",
    "options": "Store"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "HT Customer_details"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fetch_if_empty": 1,
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fetch_from": "customer.phone_number",
+   "fetch_if_empty": 1,
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 13:33:48.663160",
+ "modified": "2024-06-28 10:58:29.909562",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Invoice",

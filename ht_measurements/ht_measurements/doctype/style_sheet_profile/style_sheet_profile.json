@@ -1,38 +1,32 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:ST-{branch_name}",
- "creation": "2024-06-10 18:46:50.588912",
+ "autoname": "format:PR-{##}",
+ "creation": "2024-06-28 07:31:25.324368",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "store_details_section",
-  "branch_name",
-  "address"
+  "profile_name",
+  "description"
  ],
  "fields": [
   {
-   "fieldname": "store_details_section",
-   "fieldtype": "Section Break",
-   "label": "Store Details"
-  },
-  {
-   "fieldname": "branch_name",
+   "fieldname": "profile_name",
    "fieldtype": "Data",
-   "label": "Branch Name "
+   "label": "Profile Name"
   },
   {
-   "fieldname": "address",
-   "fieldtype": "Text",
-   "label": "Address"
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-28 07:24:13.416188",
+ "modified": "2024-06-28 07:38:46.754101",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
- "name": "Store",
+ "name": "style_sheet_profile",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -44,8 +38,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Administrator",
-   "select": 1,
+   "role": "System Manager",
    "share": 1,
    "write": 1
   }
