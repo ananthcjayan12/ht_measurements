@@ -8,6 +8,22 @@
         <h5 class="card-title text-center">{{ _("Customer Details") }}</h5>
         <form id="customer-details-form">
             <div class="form-group">
+                <label for="customer_id">{{ _("Customer:") }}</label>
+                <input hidden type="text" id="customer_id_1"  class="form-control" value="">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="customerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ _("Select a customer") }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="customerDropdown">
+                        <input type="text" id="customer_search" class="form-control" placeholder="{{ _("Search for a customer") }}">
+                        <div id="customer_list"></div>
+                    </div>
+                </div>
+                <select id="customer_id" name="customer_id" class="form-control d-none">
+                    <option value="">{{ _("Select a customer") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="name1">{{ _("Name:") }}</label>
                 <input type="text" id="name1" name="name1" class="form-control" required>
             </div>
@@ -38,43 +54,10 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">{{ _("Submit") }}</button>
         </form>
+        <button id="create-customer" class="btn btn-secondary btn-block mt-3">{{ _("Create New Customer") }}</button>
     </div>
 </div>
 {% endblock %}
 
-{% block script %}
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("customer-details-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-        
-        frappe.call({
-            method: "frappe.client.insert",
-            args: {
-                doc: {
-                    doctype: "HT Invoice",
-                    name1: data.name1,
-                    delivery_date: data.delivery_date,
-                    gender: data.gender,
-                    invoice_number: data.invoice_number,
-                    trial_date: data.trial_date,
-                    store: new URLSearchParams(window.location.search).get('store')
-                }
-            },
-            callback: function (r) {
-                if (r.message) {
-                    window.location.href = `/ht_app/measurements?invoice_number=${data.invoice_number}`;
-                } else {
-                    alert("There was an error saving the customer details. Please try again.");
-                }
-            }
-        });
-    });
-});
-</script>
-{% endblock %}
+
+

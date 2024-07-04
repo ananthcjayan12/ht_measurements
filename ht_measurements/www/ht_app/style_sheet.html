@@ -56,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             const type = this.getAttribute("data-type");
             const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-            window.location.href = `/ht_app/${type}_style?invoice_number=${invoiceNumber}`;
+            const profile_name = new URLSearchParams(window.location.search).get('profile_id');
+            window.location.href = `/ht_app/${type}_style?invoice_number=${invoiceNumber}&profile_id=${profile_name}`;
         });
     });
 });

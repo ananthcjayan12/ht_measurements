@@ -26,8 +26,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Phone Number",
-   "reqd": 1,
-   "unique": 1
+   "reqd": 1
   },
   {
    "fieldname": "gender",
@@ -38,7 +37,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-28 11:03:37.988252",
+ "modified": "2024-06-29 09:09:39.128244",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Customer_details",

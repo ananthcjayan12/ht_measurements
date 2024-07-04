@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class style_sheet_profiles(Document):
+class HtInvoiceStyleSheetProfileLink(Document):
 	pass

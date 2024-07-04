@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:SH_ST {invoice}",
+ "autoname": "format:SH-ST-{invoice}-{profile}-{##}",
  "creation": "2024-06-19 10:20:39.494252",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,6 +10,7 @@
   "style_form_id",
   "invoice",
   "quantity",
+  "profile",
   "column_break_vthx",
   "fabric_swatch",
   "lining_swatch",
@@ -106,9 +107,9 @@
   },
   {
    "fieldname": "cuff_style",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "label": "Cuff Style",
-   "options": "One Button\nTwo Button\nFrench Cuff\n"
+   "options": "One Button\nTwo Button\nFrench Cuff"
   },
   {
    "fieldname": "cuff_size",
@@ -120,8 +121,7 @@
    "fieldname": "invoice",
    "fieldtype": "Link",
    "label": "Invoice Number",
-   "options": "HT Invoice",
-   "unique": 1
+   "options": "HT Invoice"
   },
   {
    "fieldname": "details_section",
@@ -141,12 +141,18 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "profile",
+   "options": "style_sheet_profile"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-20 02:20:17.766427",
+ "modified": "2024-07-04 11:21:15.533528",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Shirt Style Sheet",

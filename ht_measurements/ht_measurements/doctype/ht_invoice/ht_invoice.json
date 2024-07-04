@@ -14,7 +14,8 @@
   "column_break_trut",
   "invoice_number",
   "trial_date",
-  "store"
+  "store",
+  "style_profiles"
  ],
  "fields": [
   {
@@ -72,11 +73,17 @@
    "fieldname": "phone_number",
    "fieldtype": "Data",
    "label": "Phone Number"
+  },
+  {
+   "fieldname": "style_profiles",
+   "fieldtype": "Table",
+   "label": "style profiles",
+   "options": "Ht Invoice Style Sheet Profile Link"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-28 10:58:29.909562",
+ "modified": "2024-06-29 12:29:01.473795",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Invoice",

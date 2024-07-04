@@ -123,13 +123,16 @@ app_include_css = "/assets/ht_measurements/css/custom.css"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	# "*": {
+	# 	"on_update": "method",
+	# 	"on_cancel": "method",
+	# 	"on_trash": "method"
+	# }
+    # "HT Customer_details": {
+    #     "before_save": "ht_measurements.ht_measurements.api.v1.update_customer_if_needed"
+    # }
+}
 
 # Scheduled Tasks
 # ---------------

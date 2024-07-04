@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "profile_name",
-  "description"
+  "description",
+  "customer"
  ],
  "fields": [
   {
@@ -19,11 +20,17 @@
    "fieldname": "description",
    "fieldtype": "Data",
    "label": "Description"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "HT Customer_details"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-28 07:38:46.754101",
+ "modified": "2024-07-04 11:00:59.823234",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "style_sheet_profile",

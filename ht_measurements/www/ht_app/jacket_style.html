@@ -133,6 +133,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+    const profile = new URLSearchParams(window.location.search).get('profile_id');
 
     // Load existing data if available
     frappe.call({
@@ -185,13 +186,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     sleeve_buttons: data.sleeve_buttons,
                     pick_stitch: data.pick_stitch,
                     others: data.others,
+                    profile : profile,
                     docstatus: 1 // Submitting the document
                 }
             },
             callback: function (r) {
                 if (r.message) {
                     alert("Jacket style saved successfully.");
-                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}`;
+                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profile}`;
                 } else {
                     alert("There was an error saving the jacket style. Please try again.");
                 }

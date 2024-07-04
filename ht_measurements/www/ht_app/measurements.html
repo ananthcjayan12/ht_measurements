@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("go-to-style-sheet").addEventListener("click", function () {
         const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-        window.location.href = `/ht_app/style_sheet?invoice_number=${invoiceNumber}`;
+        window.location.href = `/ht_app/style_sheet_profiles?invoice_number=${invoiceNumber}`;
     });
 });
 </script>

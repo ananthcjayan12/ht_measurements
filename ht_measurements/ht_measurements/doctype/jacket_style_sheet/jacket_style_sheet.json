@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:JK-ST {invoice}",
+ "autoname": "format:JK-ST-{invoice}-{profile}-{##}",
  "creation": "2024-06-14 09:43:45.739094",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,10 +10,12 @@
   "style_form_id",
   "fabric_swatch",
   "amended_from",
+  "profile",
   "column_break_rnzg",
   "invoice",
   "lining_swatch",
   "button_code",
+  "style",
   "styling_section",
   "front_pockets",
   "number_of_buttons",
@@ -59,8 +61,7 @@
    "fieldname": "invoice",
    "fieldtype": "Link",
    "label": "Invoice Number",
-   "options": "HT Invoice",
-   "unique": 1
+   "options": "HT Invoice"
   },
   {
    "fieldname": "fabric_swatch",
@@ -156,12 +157,24 @@
    "fieldname": "others",
    "fieldtype": "Data",
    "label": "Others"
+  },
+  {
+   "fieldname": "style",
+   "fieldtype": "Link",
+   "label": "style",
+   "options": "style_sheet_profile"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "profile",
+   "options": "style_sheet_profile"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-20 02:21:15.661446",
+ "modified": "2024-07-04 12:51:54.572292",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Jacket Style Sheet",

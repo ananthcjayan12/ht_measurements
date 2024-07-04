@@ -115,6 +115,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+    const profile = new URLSearchParams(window.location.search).get('profile_id');
 
     // Load existing data if available
     frappe.call({
@@ -165,13 +166,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     collar_size: data.collar_size,
                     cuff_style: data.cuff_style,
                     cuff_size: data.cuff_size,
+                    profile : profile,
                     docstatus: 1 // Submitting the document
                 }
             },
             callback: function (r) {
                 if (r.message) {
                     alert("Shirt style saved successfully.");
-                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}`;
+                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profile}`;
                 } else {
                     alert("There was an error saving the shirt style. Please try again.");
                 }
