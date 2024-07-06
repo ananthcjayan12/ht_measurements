@@ -8,14 +8,6 @@
     <div class="card shadow-lg p-4">
         <h5 class="card-title text-center">{{ _("Shirt Style Details") }}</h5>
         <form id="shirt-style-form">
-            <!-- <div class="form-group">
-                <label for="style_form_id">{{ _("Style Form ID:") }}</label>
-                <input type="text" id="style_form_id" name="style_form_id" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="invoice">{{ _("Invoice Number:") }}</label>
-                <input type="text" id="invoice" name="invoice" class="form-control" required>
-            </div> -->
             <div class="form-group">
                 <label for="quantity">{{ _("Quantity:") }}</label>
                 <input type="text" id="quantity" name="quantity" class="form-control">
@@ -67,7 +59,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="black_dart">{{ _("Black Dart:") }}</label>
+                <label for="black_dart">{{ _("Back Dart:") }}</label>
                 <select id="black_dart" name="black_dart" class="form-control">
                     <option value="Dart">{{ _("Dart") }}</option>
                     <option value="Center Box">{{ _("Center Box") }}</option>
@@ -115,71 +107,130 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-    const profile = new URLSearchParams(window.location.search).get('profile_id');
+    const profileName = new URLSearchParams(window.location.search).get('profile_id');
 
     // Load existing data if available
+    loadExistingData(invoiceNumber, profileName);
+
+    document.getElementById("shirt-style-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = getFormData(e.target);
+        data.invoice = invoiceNumber;
+
+        handleFormSubmission(data, profileName);
+    });
+});
+
+function loadExistingData(invoiceNumber, profileName) {
     frappe.call({
         method: "frappe.client.get_list",
         args: {
             doctype: "Shirt Style Sheet",
             fields: ["*"],
-            filters: { invoice: invoiceNumber }
+            filters: { invoice: invoiceNumber, docstatus: 1, profile: profileName }
         },
         callback: function (r) {
             if (r.message.length > 0) {
                 const data = r.message[0];
-                for (const [key, value] of Object.entries(data)) {
-                    if (document.getElementById(key)) {
-                        document.getElementById(key).value = value;
-                    }
-                }
+                populateForm(data);
             }
         }
     });
+}
 
-    document.getElementById("shirt-style-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-        data.invoice = invoiceNumber;
+function populateForm(data) {
+    for (const [key, value] of Object.entries(data)) {
+        const element = document.getElementById(key);
+        if (element) {
+            element.value = value;
+        }
+    }
+}
 
-        frappe.call({
-            method: "frappe.client.insert",
-            args: {
-                doc: {
-                    doctype: "Shirt Style Sheet",
-                    style_form_id: data.style_form_id,
-                    invoice: data.invoice,
-                    quantity: data.quantity,
-                    fabric_swatch: data.fabric_swatch,
-                    lining_swatch: data.lining_swatch,
-                    buttons_code: data.buttons_code,
-                    shirt_fit: data.shirt_fit,
-                    front_pockets: data.front_pockets,
-                    collar_style: data.collar_style,
-                    front_placket: data.front_placket,
-                    black_dart: data.black_dart,
-                    name_embroidery: data.name_embroidery,
-                    collar_size: data.collar_size,
-                    cuff_style: data.cuff_style,
-                    cuff_size: data.cuff_size,
-                    profile : profile,
-                    docstatus: 1 // Submitting the document
-                }
-            },
-            callback: function (r) {
-                if (r.message) {
-                    alert("Shirt style saved successfully.");
-                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profile}`;
-                } else {
-                    alert("There was an error saving the shirt style. Please try again.");
-                }
-            }
-        });
+function getFormData(formElement) {
+    const formData = new FormData(formElement);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
     });
-});
+    return data;
+}
+
+function handleFormSubmission(data, profileName) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Shirt Style Sheet",
+            filters: { invoice: data.invoice, profile: profileName, docstatus: 1 },
+            fields: ["name", "docstatus"]
+        },
+        callback: function (r) {
+            if (r.message && r.message.length > 0) {
+                const existingEntry = r.message[0];
+                cancelExistingEntry(existingEntry.name, function () {
+                    insertNewEntry(data, profileName, existingEntry.name);
+                });
+            } else {
+                insertNewEntry(data, profileName, null);
+            }
+        }
+    });
+}
+
+function cancelExistingEntry(entryName, callback) {
+    frappe.call({
+        method: "frappe.client.set_value",
+        args: {
+            doctype: "Shirt Style Sheet",
+            name: entryName,
+            fieldname: { docstatus: 2 } // 2 stands for "Cancelled"
+        },
+        callback: function (res) {
+            if (res.message) {
+                callback();
+            } else {
+                alert("There was an error cancelling the existing shirt style. Please try again.");
+            }
+        }
+    });
+}
+
+function insertNewEntry(data, profileName, amendedFrom) {
+    frappe.call({
+        method: "frappe.client.insert",
+        args: {
+            doc: {
+                doctype: "Shirt Style Sheet",
+                style_form_id: data.style_form_id,
+                invoice: data.invoice,
+                quantity: data.quantity,
+                fabric_swatch: data.fabric_swatch,
+                lining_swatch: data.lining_swatch,
+                buttons_code: data.buttons_code,
+                shirt_fit: data.shirt_fit,
+                front_pockets: data.front_pockets,
+                collar_style: data.collar_style,
+                front_placket: data.front_placket,
+                black_dart: data.black_dart,
+                name_embroidery: data.name_embroidery,
+                collar_size: data.collar_size,
+                cuff_style: data.cuff_style,
+                cuff_size: data.cuff_size,
+                profile: profileName,
+                docstatus: 1, // Submitting the document
+                amended_from: amendedFrom // Reference to the original document
+            }
+        },
+        callback: function (r) {
+            if (r.message) {
+                alert("Shirt style saved successfully.");
+                window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profileName}`;
+            } else {
+                alert("There was an error saving the shirt style. Please try again.");
+            }
+        }
+    });
+}
+
 </script>
 {% endblock %}
