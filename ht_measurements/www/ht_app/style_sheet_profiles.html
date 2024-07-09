@@ -75,10 +75,18 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <p class="mb-1">${profile.description}</p>
                                     </label>
                                 </div>
-                                <button class="btn btn-sm btn-secondary" onclick="editProfile('${profile.name}')">{{ _("Edit") }}</button>
+                                <button type="button" class="btn btn-sm btn-secondary edit-btn" data-profile-id="${profile.name}">{{ _("Edit") }}</button>
                             </div>
                         `;
                         profileList.appendChild(listItem);
+                    });
+
+                    // Add event listeners for edit buttons after they are added to the DOM
+                    document.querySelectorAll('.edit-btn').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const profileId = this.getAttribute('data-profile-id');
+                            editProfile(profileId);
+                        });
                     });
                 }
             }
@@ -167,14 +175,58 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    window.editProfile = function (profileId) {
+    function editProfile(profileId) {
         window.location.href = `/ht_app/style_sheet?invoice_number=${invoiceNumber}&profile_id=${profileId}`;
-    };
+    }
 
     document.getElementById('profile-selection-form').addEventListener('submit', function (e) {
         e.preventDefault();
         const selectedProfiles = Array.from(document.querySelectorAll('#profile-list .form-check-input:checked')).map(input => input.value);
-        // console.log(selectedProfiles);  
+
+        function saveInvoiceWithProfiles(invoice) {
+            const updatedProfiles = selectedProfiles.map(profileId => ({
+                doctype: 'Ht Invoice Style Sheet Profile Link',
+                parent: invoice.name,
+                parentfield: 'style_profiles',
+                parenttype: 'HT Invoice',
+                style_sheet_profile: profileId
+            }));
+
+            invoice.style_profiles = updatedProfiles;
+
+            frappe.call({
+                method: 'frappe.client.save',
+                args: {
+                    doc: invoice
+                },
+                callback: function (r) {
+                    if (r.message) {
+                        alert('Profiles successfully linked to the invoice.');
+                    } else {
+                        alert('There was an error linking the profiles to the invoice. Please try again.');
+                    }
+                },
+                error: function (r) {
+                    if (r.exc_type === 'TimestampMismatchError') {
+                        // Refetch the latest document and retry saving
+                        frappe.call({
+                            method: 'frappe.client.get',
+                            args: {
+                                doctype: 'HT Invoice',
+                                name: invoiceNumber
+                            },
+                            callback: function (invoice) {
+                                if (invoice.message) {
+                                    saveInvoiceWithProfiles(invoice.message);
+                                }
+                            }
+                        });
+                    } else {
+                        alert('There was an error linking the profiles to the invoice. Please try again.');
+                    }
+                }
+            });
+        }
 
         frappe.call({
             method: 'frappe.client.get',
@@ -184,32 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             callback: function (invoice) {
                 if (invoice.message) {
-                    const updatedProfiles = selectedProfiles.map(profileId => ({
-                        parent: invoice.message.name,
-                        parentfield: 'style_profiles',
-                        parenttype: 'HT Invoice',
-                        profile: profileId
-                    }));
-
-                    const invoiceDoc = {
-                        doctype: 'HT Invoice',
-                        name: invoice.message.name,
-                        style_profiles: updatedProfiles
-                    };
-
-                    frappe.call({
-                        method: 'frappe.client.save',
-                        args: {
-                            doc: invoiceDoc
-                        },
-                        callback: function (r) {
-                            if (r.message) {
-                                alert('Profiles successfully linked to the invoice.');
-                            } else {
-                                alert('There was an error linking the profiles to the invoice. Please try again.');
-                            }
-                        }
-                    });
+                    saveInvoiceWithProfiles(invoice.message);
                 }
             }
         });
