@@ -8,14 +8,10 @@
     <div class="card shadow-lg p-4">
         <h5 class="card-title text-center">{{ _("Jacket Style Details") }}</h5>
         <form id="jacket-style-form">
-            <!-- <div class="form-group">
-                <label for="style_form_id">{{ _("Style Form ID:") }}</label>
-                <input type="text" id="style_form_id" name="style_form_id" class="form-control" required>
-            </div>
             <div class="form-group">
-                <label for="invoice">{{ _("Invoice Number:") }}</label>
-                <input type="text" id="invoice" name="invoice" class="form-control" required>
-            </div> -->
+                <label for="quantity">{{ _("Quantity:") }}</label>
+                <input type="text" id="quantity" name="quantity" class="form-control">
+            </div>
             <div class="form-group">
                 <label for="fabric_swatch">{{ _("Fabric Swatch:") }}</label>
                 <input type="text" id="fabric_swatch" name="fabric_swatch" class="form-control">
@@ -28,6 +24,7 @@
                 <label for="button_code">{{ _("Button Code:") }}</label>
                 <input type="text" id="button_code" name="button_code" class="form-control">
             </div>
+            <h5 class="card-title text-center mt-4">{{ _("Styling") }}</h5>
             <div class="form-group">
                 <label for="jacket">{{ _("Jacket:") }}</label>
                 <select id="jacket" name="jacket" class="form-control">
@@ -53,7 +50,6 @@
                     <option value="With Ticket">{{ _("With Ticket") }}</option>
                 </select>
             </div>
-            <h5 class="card-title text-center mt-4">{{ _("Styling") }}</h5>
             <div class="form-group">
                 <label for="lapel_pin_hole">{{ _("Lapel Pin Hole:") }}</label>
                 <select id="lapel_pin_hole" name="lapel_pin_hole" class="form-control">
@@ -89,7 +85,7 @@
             <div class="form-group">
                 <label for="inside_pockets">{{ _("Inside Pockets:") }}</label>
                 <select id="inside_pockets" name="inside_pockets" class="form-control">
-                    <option value="2 Pocket">{{ _("2 Pockets") }}</option>
+                    <option value="2 Pockets">{{ _("2 Pockets") }}</option>
                     <option value="3 Pockets">{{ _("3 Pockets") }}</option>
                     <option value="4 Pockets">{{ _("4 Pockets") }}</option>
                     <option value="No Pocket">{{ _("No Pocket") }}</option>
@@ -133,73 +129,133 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
-    const profile = new URLSearchParams(window.location.search).get('profile_id');
+    const profileName = new URLSearchParams(window.location.search).get('profile_id');
 
     // Load existing data if available
+    loadExistingData(invoiceNumber, profileName);
+
+    document.getElementById("jacket-style-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = getFormData(e.target);
+        data.invoice = invoiceNumber;
+
+        handleFormSubmission(data, profileName);
+    });
+});
+
+function loadExistingData(invoiceNumber, profileName) {
     frappe.call({
         method: "frappe.client.get_list",
         args: {
             doctype: "Jacket Style Sheet",
             fields: ["*"],
-            filters: { invoice: invoiceNumber }
+            filters: { invoice: invoiceNumber, docstatus: 1, profile: profileName }
         },
         callback: function (r) {
             if (r.message.length > 0) {
                 const data = r.message[0];
-                for (const [key, value] of Object.entries(data)) {
-                    if (document.getElementById(key)) {
-                        document.getElementById(key).value = value;
-                    }
-                }
+                populateForm(data);
             }
         }
     });
+}
 
-    document.getElementById("jacket-style-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-        data.invoice = invoiceNumber;
+function populateForm(data) {
+    for (const [key, value] of Object.entries(data)) {
+        const element = document.getElementById(key);
+        if (element) {
+            element.value = value;
+        }
+    }
+}
 
-        frappe.call({
-            method: "frappe.client.insert",
-            args: {
-                doc: {
-                    doctype: "Jacket Style Sheet",
-                    style_form_id: data.style_form_id,
-                    invoice: data.invoice,
-                    fabric_swatch: data.fabric_swatch,
-                    lining_swatch: data.lining_swatch,
-                    button_code: data.button_code,
-                    jacket: data.jacket,
-                    number_of_buttons: data.number_of_buttons,
-                    front_pockets: data.front_pockets,
-                    lapel_pin_hole: data.lapel_pin_hole,
-                    lapel: data.lapel,
-                    back_vent_open: data.back_vent_open,
-                    inside_fashion: data.inside_fashion,
-                    inside_pockets: data.inside_pockets,
-                    extra_pocket: data.extra_pocket,
-                    sleeve_buttons: data.sleeve_buttons,
-                    pick_stitch: data.pick_stitch,
-                    others: data.others,
-                    profile : profile,
-                    docstatus: 1 // Submitting the document
-                }
-            },
-            callback: function (r) {
-                if (r.message) {
-                    alert("Jacket style saved successfully.");
-                    window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profile}`;
-                } else {
-                    alert("There was an error saving the jacket style. Please try again.");
-                }
-            }
-        });
+function getFormData(formElement) {
+    const formData = new FormData(formElement);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
     });
-});
+    return data;
+}
+
+function handleFormSubmission(data, profileName) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Jacket Style Sheet",
+            filters: { invoice: data.invoice, profile: profileName, docstatus: 1 },
+            fields: ["name", "docstatus"]
+        },
+        callback: function (r) {
+            if (r.message && r.message.length > 0) {
+                const existingEntry = r.message[0];
+                cancelExistingEntry(existingEntry.name, function () {
+                    insertNewEntry(data, profileName, existingEntry.name);
+                });
+            } else {
+                insertNewEntry(data, profileName, null);
+            }
+        }
+    });
+}
+
+function cancelExistingEntry(entryName, callback) {
+    frappe.call({
+        method: "frappe.client.set_value",
+        args: {
+            doctype: "Jacket Style Sheet",
+            name: entryName,
+            fieldname: { docstatus: 2 } // 2 stands for "Cancelled"
+        },
+        callback: function (res) {
+            if (res.message) {
+                callback();
+            } else {
+                alert("There was an error cancelling the existing jacket style. Please try again.");
+            }
+        }
+    });
+}
+
+function insertNewEntry(data, profileName, amendedFrom) {
+    frappe.call({
+        method: "frappe.client.insert",
+        args: {
+            doc: {
+                doctype: "Jacket Style Sheet",
+                style_form_id: data.style_form_id,
+                invoice: data.invoice,
+                quantity: data.quantity,
+                fabric_swatch: data.fabric_swatch,
+                lining_swatch: data.lining_swatch,
+                button_code: data.button_code,
+                jacket: data.jacket,
+                number_of_buttons: data.number_of_buttons,
+                front_pockets: data.front_pockets,
+                lapel_pin_hole: data.lapel_pin_hole,
+                lapel: data.lapel,
+                back_vent_open: data.back_vent_open,
+                inside_fashion: data.inside_fashion,
+                inside_pockets: data.inside_pockets,
+                extra_pocket: data.extra_pocket,
+                sleeve_buttons: data.sleeve_buttons,
+                pick_stitch: data.pick_stitch,
+                others: data.others,
+                profile: profileName,
+                docstatus: 1, // Submitting the document
+                amended_from: amendedFrom // Reference to the original document
+            }
+        },
+        callback: function (r) {
+            if (r.message) {
+                alert("Jacket style saved successfully.");
+                window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profileName}`;
+            } else {
+                alert("There was an error saving the jacket style. Please try again.");
+            }
+        }
+    });
+}
+
 </script>
 {% endblock %}
