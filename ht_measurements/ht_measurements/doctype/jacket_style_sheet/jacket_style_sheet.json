@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:JK-ST-{invoice}-{profile}-{##}",
+ "creation": "2024-06-14 09:43:45.739094",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_uzix",
+  "style_form_id",
+  "fabric_swatch",
+  "amended_from",
+  "profile",
+  "column_break_rnzg",
+  "invoice",
+  "lining_swatch",
+  "button_code",
+  "style",
+  "styling_section",
+  "front_pockets",
+  "number_of_buttons",
+  "select_grke",
+  "inside_fashion",
+  "extra_pocket",
+  "pick_stitch",
+  "column_break_wpmh",
+  "jacket",
+  "lapel",
+  "back_vent_open",
+  "inside_pockets",
+  "sleeve_buttons",
+  "others"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_uzix",
+   "fieldtype": "Section Break",
+   "label": "Jacket Style Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Jacket Style Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_rnzg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "style_form_id",
+   "fieldtype": "Link",
+   "label": "Style Form ID",
+   "options": "HT Invoice"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice Number",
+   "options": "HT Invoice"
+  },
+  {
+   "fieldname": "fabric_swatch",
+   "fieldtype": "Data",
+   "label": "Fabric Swatch"
+  },
+  {
+   "fieldname": "lining_swatch",
+   "fieldtype": "Data",
+   "label": "Lining Swatch"
+  },
+  {
+   "fieldname": "button_code",
+   "fieldtype": "Data",
+   "label": "Button Code"
+  },
+  {
+   "fieldname": "jacket",
+   "fieldtype": "Select",
+   "label": "Jacket",
+   "options": "Single Breasted\nDouble Breasted\nBand Gala\nBundy"
+  },
+  {
+   "fieldname": "number_of_buttons",
+   "fieldtype": "Select",
+   "label": "Number of Buttons",
+   "options": "1 Button\n2 Buttons\n3 Buttons"
+  },
+  {
+   "fieldname": "front_pockets",
+   "fieldtype": "Select",
+   "label": "Front Pockets",
+   "options": "Straight\nSlanting\nWith Ticket"
+  },
+  {
+   "fieldname": "styling_section",
+   "fieldtype": "Section Break",
+   "label": "Styling"
+  },
+  {
+   "fieldname": "column_break_wpmh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "select_grke",
+   "fieldtype": "Select",
+   "label": "Lapel Pin Hole",
+   "options": "Show\nWith Hole\nNone"
+  },
+  {
+   "fieldname": "lapel",
+   "fieldtype": "Select",
+   "label": "Lapel",
+   "options": "Notch\nPeak\nShawl"
+  },
+  {
+   "fieldname": "back_vent_open",
+   "fieldtype": "Select",
+   "label": "Back Vent Open",
+   "options": "Side Vent\nCenter Vent\nNo Vent"
+  },
+  {
+   "fieldname": "inside_fashion",
+   "fieldtype": "Select",
+   "label": "Inside Fashion",
+   "options": "Straight\nTakurdwara\nPiping"
+  },
+  {
+   "fieldname": "inside_pockets",
+   "fieldtype": "Select",
+   "label": "Inside Pockets",
+   "options": "2 Pocket\n3 Pockets\n4 Pockets\nNo Pocket"
+  },
+  {
+   "fieldname": "extra_pocket",
+   "fieldtype": "Select",
+   "label": "Extra Pocket",
+   "options": "Pen Pocket\nPassport\nNone"
+  },
+  {
+   "fieldname": "sleeve_buttons",
+   "fieldtype": "Select",
+   "label": "Sleeve Buttons",
+   "options": "3 Buttons\n4 Buttons\n5 Buttons"
+  },
+  {
+   "fieldname": "pick_stitch",
+   "fieldtype": "Select",
+   "label": "Pick Stitch",
+   "options": "Full Pick\nLapel Pick\nNone"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Data",
+   "label": "Others"
+  },
+  {
+   "fieldname": "style",
+   "fieldtype": "Link",
+   "label": "style",
+   "options": "style_sheet_profile"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "profile",
+   "options": "style_sheet_profile"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-04 12:51:54.572292",
+ "modified_by": "Administrator",
+ "module": "Ht Measurements",
+ "name": "Jacket Style Sheet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

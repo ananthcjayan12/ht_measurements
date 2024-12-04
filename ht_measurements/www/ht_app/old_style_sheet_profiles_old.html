@@ -1,0 +1,182 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Style Sheet Profiles") }}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/css/styles.css">
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h5 class="card-title text-center">{{ _("Style Sheet Profiles") }}</h5>
+        <div class="mb-3">
+            <button class="btn btn-primary" id="add-profile-btn">{{ _("Add New Profile") }}</button>
+        </div>
+        <div class="list-group" id="profile-list">
+            <!-- Profiles will be loaded here via JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Viewing/Editing Profile -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profileModalLabel">{{ _("Profile Details") }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="profile-form">
+                    <div class="mb-3">
+                        <label for="profile-name" class="form-label">{{ _("Profile Name") }}</label>
+                        <input type="text" class="form-control" id="profile-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="profile-description" class="form-label">{{ _("Description") }}</label>
+                        <textarea class="form-control" id="profile-description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ _("Save Profile") }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+    let customerId = null;
+
+    function loadProfiles(customerId) {
+        frappe.call({
+            method: 'frappe.client.get_list',
+            args: {
+                doctype: 'style_sheet_profile',
+                filters: { 'customer': customerId },
+                fields: ['name', 'profile_name', 'description']
+            },
+            callback: function (r) {
+                if (r.message) {
+                    const profileList = document.getElementById('profile-list');
+                    profileList.innerHTML = '';
+                    r.message.forEach(profile => {
+                        const listItem = document.createElement('a');
+                        listItem.className = 'list-group-item list-group-item-action';
+                        listItem.href = `/ht_app/style_sheet?invoice_number=${invoiceNumber}&profile_id=${profile.name}`;
+                        listItem.innerHTML = `
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">${profile.profile_name}</h5>
+                                <button class="btn btn-sm btn-secondary" onclick="editProfile('${profile.name}')">{{ _("Edit") }}</button>
+                            </div>
+                            <p class="mb-1">${profile.description}</p>
+                        `;
+                        profileList.appendChild(listItem);
+                    });
+                }
+            }
+        });
+    }
+
+    function fetchCustomerId() {
+        frappe.call({
+            method: 'frappe.client.get',
+            args: {
+                doctype: 'HT Invoice',
+                name: invoiceNumber
+            },
+            callback: function (r) {
+                if (r.message && r.message.customer) {
+                    customerId = r.message.customer;
+                    loadProfiles(customerId);
+                }
+            }
+        });
+    }
+
+    document.getElementById('add-profile-btn').addEventListener('click', function () {
+        const dialog = new frappe.ui.Dialog({
+            title: 'Add New Profile',
+            fields: [
+                {
+                    fieldname: 'profile_name',
+                    label: 'Profile Name',
+                    fieldtype: 'Data',
+                    reqd: 1
+                },
+                {
+                    fieldname: 'description',
+                    label: 'Description',
+                    fieldtype: 'Data'
+                }
+            ],
+            primary_action_label: 'Save',
+            primary_action: function (data) {
+                frappe.call({
+                    method: 'frappe.client.insert',
+                    args: {
+                        doc: {
+                            doctype: 'style_sheet_profile',
+                            profile_name: data.profile_name,
+                            description: data.description,
+                            customer: customerId
+                        }
+                    },
+                    callback: function (r) {
+                        if (r.message) {
+                            loadProfiles(customerId);
+                            dialog.hide();
+                        }
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+    });
+
+    document.getElementById('profile-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const profileName = document.getElementById('profile-name').value;
+        const profileDescription = document.getElementById('profile-description').value;
+
+        frappe.call({
+            method: 'frappe.client.insert',
+            args: {
+                doc: {
+                    doctype: 'style_sheet_profile',
+                    profile_name: profileName,
+                    description: profileDescription,
+                    customer: customerId
+                }
+            },
+            callback: function (r) {
+                if (r.message) {
+                    loadProfiles(customerId);
+                    const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
+                    profileModal.hide();
+                }
+            }
+        });
+    });
+
+    window.editProfile = function (profileId) {
+        const profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
+        frappe.call({
+            method: 'frappe.client.get',
+            args: { doctype: 'style_sheet_profile', name: profileId },
+            callback: function (r) {
+                if (r.message) {
+                    document.getElementById('profile-name').value = r.message.profile_name;
+                    document.getElementById('profile-description').value = r.message.description;
+                    profileModal.show();
+                }
+            }
+        });
+    };
+
+    fetchCustomerId();
+});
+
+</script>
+{% endblock %}

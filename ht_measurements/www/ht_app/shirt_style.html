@@ -1,0 +1,236 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Shirt Style") }}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/css/shirt_style.css">
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h5 class="card-title text-center">{{ _("Shirt Style Details") }}</h5>
+        <form id="shirt-style-form">
+            <div class="form-group">
+                <label for="quantity">{{ _("Quantity:") }}</label>
+                <input type="text" id="quantity" name="quantity" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="fabric_swatch">{{ _("Fabric Swatch:") }}</label>
+                <input type="text" id="fabric_swatch" name="fabric_swatch" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lining_swatch">{{ _("Lining Swatch:") }}</label>
+                <input type="text" id="lining_swatch" name="lining_swatch" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="buttons_code">{{ _("Buttons Code:") }}</label>
+                <input type="text" id="buttons_code" name="buttons_code" class="form-control">
+            </div>
+            <h5 class="card-title text-center mt-4">{{ _("Styling") }}</h5>
+            <div class="form-group">
+                <label for="shirt_fit">{{ _("Shirt Fit:") }}</label>
+                <select id="shirt_fit" name="shirt_fit" class="form-control">
+                    <option value="Comfort">{{ _("Comfort") }}</option>
+                    <option value="Slim">{{ _("Slim") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="front_pockets">{{ _("Front Pockets:") }}</label>
+                <select id="front_pockets" name="front_pockets" class="form-control">
+                    <option value="Single">{{ _("Single") }}</option>
+                    <option value="Double">{{ _("Double") }}</option>
+                    <option value="No Pocket">{{ _("No Pocket") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="collar_style">{{ _("Collar Style:") }}</label>
+                <select id="collar_style" name="collar_style" class="form-control">
+                    <option value="Regular">{{ _("Regular") }}</option>
+                    <option value="Semi Cut Way">{{ _("Semi Cut Way") }}</option>
+                    <option value="Full Cut Way">{{ _("Full Cut Way") }}</option>
+                    <option value="Tux Wing">{{ _("Tux Wing") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="front_placket">{{ _("Front Placket:") }}</label>
+                <select id="front_placket" name="front_placket" class="form-control">
+                    <option value="With Placket">{{ _("With Placket") }}</option>
+                    <option value="Invisible Buttons">{{ _("Invisible Buttons") }}</option>
+                    <option value="No Placket">{{ _("No Placket") }}</option>
+                    <option value="Tux Pleats">{{ _("Tux Pleats") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="black_dart">{{ _("Back Dart:") }}</label>
+                <select id="black_dart" name="black_dart" class="form-control">
+                    <option value="Dart">{{ _("Dart") }}</option>
+                    <option value="Center Box">{{ _("Center Box") }}</option>
+                    <option value="Side Pleats">{{ _("Side Pleats") }}</option>
+                    <option value="None">{{ _("None") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name_embroidery">{{ _("Name Embroidery:") }}</label>
+                <select id="name_embroidery" name="name_embroidery" class="form-control">
+                    <option value="Yes">{{ _("Yes") }}</option>
+                    <option value="No">{{ _("No") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="collar_size">{{ _("Collar Size:") }}</label>
+                <select id="collar_size" name="collar_size" class="form-control">
+                    <option value="Point Size">{{ _("Point Size") }}</option>
+                    <option value="Stand Size">{{ _("Stand Size") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cuff_style">{{ _("Cuff Style:") }}</label>
+                <select id="cuff_style" name="cuff_style" class="form-control">
+                    <option value="One Button">{{ _("One Button") }}</option>
+                    <option value="Two Button">{{ _("Two Button") }}</option>
+                    <option value="French Cuff">{{ _("French Cuff") }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cuff_size">{{ _("Cuff Size:") }}</label>
+                <select id="cuff_size" name="cuff_size" class="form-control">
+                    <option value="Left">{{ _("Left") }}</option>
+                    <option value="Right">{{ _("Right") }}</option>
+                    <option value="Regular">{{ _("Regular") }}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">{{ _("Submit") }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+    const profileName = new URLSearchParams(window.location.search).get('profile_id');
+
+    // Load existing data if available
+    loadExistingData(invoiceNumber, profileName);
+
+    document.getElementById("shirt-style-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = getFormData(e.target);
+        data.invoice = invoiceNumber;
+
+        handleFormSubmission(data, profileName);
+    });
+});
+
+function loadExistingData(invoiceNumber, profileName) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Shirt Style Sheet",
+            fields: ["*"],
+            filters: { invoice: invoiceNumber, docstatus: 1, profile: profileName }
+        },
+        callback: function (r) {
+            if (r.message.length > 0) {
+                const data = r.message[0];
+                populateForm(data);
+            }
+        }
+    });
+}
+
+function populateForm(data) {
+    for (const [key, value] of Object.entries(data)) {
+        const element = document.getElementById(key);
+        if (element) {
+            element.value = value;
+        }
+    }
+}
+
+function getFormData(formElement) {
+    const formData = new FormData(formElement);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+    return data;
+}
+
+function handleFormSubmission(data, profileName) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Shirt Style Sheet",
+            filters: { invoice: data.invoice, profile: profileName, docstatus: 1 },
+            fields: ["name", "docstatus"]
+        },
+        callback: function (r) {
+            if (r.message && r.message.length > 0) {
+                const existingEntry = r.message[0];
+                cancelExistingEntry(existingEntry.name, function () {
+                    insertNewEntry(data, profileName, existingEntry.name);
+                });
+            } else {
+                insertNewEntry(data, profileName, null);
+            }
+        }
+    });
+}
+
+function cancelExistingEntry(entryName, callback) {
+    frappe.call({
+        method: "frappe.client.set_value",
+        args: {
+            doctype: "Shirt Style Sheet",
+            name: entryName,
+            fieldname: { docstatus: 2 } // 2 stands for "Cancelled"
+        },
+        callback: function (res) {
+            if (res.message) {
+                callback();
+            } else {
+                alert("There was an error cancelling the existing shirt style. Please try again.");
+            }
+        }
+    });
+}
+
+function insertNewEntry(data, profileName, amendedFrom) {
+    frappe.call({
+        method: "frappe.client.insert",
+        args: {
+            doc: {
+                doctype: "Shirt Style Sheet",
+                style_form_id: data.style_form_id,
+                invoice: data.invoice,
+                quantity: data.quantity,
+                fabric_swatch: data.fabric_swatch,
+                lining_swatch: data.lining_swatch,
+                buttons_code: data.buttons_code,
+                shirt_fit: data.shirt_fit,
+                front_pockets: data.front_pockets,
+                collar_style: data.collar_style,
+                front_placket: data.front_placket,
+                black_dart: data.black_dart,
+                name_embroidery: data.name_embroidery,
+                collar_size: data.collar_size,
+                cuff_style: data.cuff_style,
+                cuff_size: data.cuff_size,
+                profile: profileName,
+                docstatus: 1, // Submitting the document
+                amended_from: amendedFrom // Reference to the original document
+            }
+        },
+        callback: function (r) {
+            if (r.message) {
+                alert("Shirt style saved successfully.");
+                window.location.href = `/ht_app/style_sheet?invoice_number=${data.invoice}&profile_id=${profileName}`;
+            } else {
+                alert("There was an error saving the shirt style. Please try again.");
+            }
+        }
+    });
+}
+
+</script>
+{% endblock %}

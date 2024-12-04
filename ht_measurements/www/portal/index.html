@@ -1,0 +1,37 @@
+{% extends "templates/web.html" %}
+
+
+
+{% block script %}
+<script src="portal/index.js"></script>
+{% endblock %}
+
+{% block page_content %}
+<style>
+{% include "templates/styles/card_style.css" %}
+</style>
+<div class='page-card'>
+    <h5 class='page-card-head'>
+        <span class='indicator blue'>
+            {{ _("Measurement Portal") }}</span>
+    </h5>
+    <div class="page-card-body">
+        <div id="form-container">
+            <div>
+                <h2>{{ _("Select Store") }}</h2>
+                <form id="store-selection-form">
+                    <div class="form-group">
+                        <label for="store">{{ _("Store:") }}</label>
+                        <select id="store" name="store" class="form-control">
+                            {% for store in stores %}
+                                <option value="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ _("Next") }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

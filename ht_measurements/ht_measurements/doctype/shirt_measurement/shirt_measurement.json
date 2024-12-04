@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:sh-{invoice}",
  "creation": "2024-06-10 19:02:04.491674",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -22,7 +23,8 @@
   "jacket_length",
   "jacket_sleeve",
   "remarks_section",
-  "add_your_suggestions_and_remarks_here"
+  "add_your_suggestions_and_remarks_here",
+  "amended_from"
  ],
  "fields": [
   {
@@ -114,14 +116,26 @@
    "fieldtype": "Link",
    "label": "Invoice",
    "options": "HT Invoice"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shirt Measurement",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-06-10 19:21:16.283820",
+ "modified": "2024-06-11 14:19:28.935112",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "Shirt Measurement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

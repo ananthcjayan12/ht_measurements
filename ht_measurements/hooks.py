@@ -4,6 +4,7 @@ app_publisher = "ananthcjayan12"
 app_description = "App designed to help the house of tailors in the automation of their measurements"
 app_email = "ananthcjayan@gmail.com"
 app_license = "mit"
+app_include_css = "/assets/ht_measurements/css/custom.css"
 # required_apps = []
 
 # Includes in <head>
@@ -122,13 +123,16 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	# "*": {
+	# 	"on_update": "method",
+	# 	"on_cancel": "method",
+	# 	"on_trash": "method"
+	# }
+    # "HT Customer_details": {
+    #     "before_save": "ht_measurements.ht_measurements.api.v1.update_customer_if_needed"
+    # }
+}
 
 # Scheduled Tasks
 # ---------------

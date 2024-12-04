@@ -1,0 +1,194 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:TR-ST-{invoice}-{profile}-{##}",
+ "creation": "2024-06-19 10:33:55.037153",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "style_form_id",
+  "fabric_swatch",
+  "quantity",
+  "column_break_ytoi",
+  "invoice",
+  "buttons_code",
+  "ht_order",
+  "profile",
+  "section_break_qwgh",
+  "fit",
+  "back_pockets",
+  "inside_lining",
+  "side_adjuster",
+  "button_style",
+  "coin_pocket",
+  "column_break_vbnu",
+  "front_pleats",
+  "back_pocket_style",
+  "loops",
+  "front_pocket",
+  "buttonhook",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "style_form_id",
+   "fieldtype": "Link",
+   "label": "Style Form ID",
+   "options": "Styling Form"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "fabric_swatch",
+   "fieldtype": "Data",
+   "label": "Fabric Swatch"
+  },
+  {
+   "fieldname": "buttons_code",
+   "fieldtype": "Data",
+   "label": "Buttons Code"
+  },
+  {
+   "fieldname": "section_break_qwgh",
+   "fieldtype": "Section Break",
+   "label": "STYLING"
+  },
+  {
+   "fieldname": "fit",
+   "fieldtype": "Select",
+   "label": "Fit",
+   "options": "Comfort\nSlim"
+  },
+  {
+   "fieldname": "back_pockets",
+   "fieldtype": "Select",
+   "label": "Back Pockets",
+   "options": "1 Pocket\n2 Pockets\nNo Pockets"
+  },
+  {
+   "fieldname": "inside_lining",
+   "fieldtype": "Select",
+   "label": "Inside Lining",
+   "options": "Half Lining\nFull Lining\nNo Lining"
+  },
+  {
+   "fieldname": "side_adjuster",
+   "fieldtype": "Select",
+   "label": "Side Adjuster",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "button_style",
+   "fieldtype": "Select",
+   "label": "Button Style",
+   "options": "Cuff Fold\nNormal Hemming\nFold & Stich"
+  },
+  {
+   "fieldname": "column_break_vbnu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "front_pleats",
+   "fieldtype": "Select",
+   "label": "Front Pleats",
+   "options": "1 Pleat\n2 Pleats\nNo Pleats\nFront Darts"
+  },
+  {
+   "fieldname": "back_pocket_style",
+   "fieldtype": "Select",
+   "label": "Back Pocket Style",
+   "options": "Pocket Flap\nButton Flap\nKaaj"
+  },
+  {
+   "fieldname": "loops",
+   "fieldtype": "Select",
+   "label": "Loops",
+   "options": "8 Loops\n6 Loops\nNo Loops"
+  },
+  {
+   "fieldname": "front_pocket",
+   "fieldtype": "Select",
+   "label": "Front Pocket",
+   "options": "Cross\nStraight\nJeans Style\nNo Pockets"
+  },
+  {
+   "fieldname": "coin_pocket",
+   "fieldtype": "Select",
+   "label": "Coin Pocket",
+   "options": "Inside Belt\nInside Right Pocket\nNone"
+  },
+  {
+   "fieldname": "buttonhook",
+   "fieldtype": "Select",
+   "label": "Button/Hook",
+   "options": "Long Belt\nHook\nButton"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "DETAILS"
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice Number",
+   "options": "HT Invoice"
+  },
+  {
+   "fieldname": "column_break_ytoi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Trouser Style Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "ht_order",
+   "fieldtype": "Link",
+   "label": "HT Order",
+   "options": "Ht_Order"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "profile",
+   "options": "style_sheet_profile"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-04 11:22:18.339118",
+ "modified_by": "Administrator",
+ "module": "Ht Measurements",
+ "name": "Trouser Style Sheet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

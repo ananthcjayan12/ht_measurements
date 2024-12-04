@@ -1,25 +1,23 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:INV-{DD}{MM}{YY}-{###}",
+ "autoname": "format:{invoice_number}",
  "creation": "2024-06-10 18:51:54.351371",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name1",
-  "delivery_date",
+  "customer_name",
+  "phone_number",
   "gender",
+  "customer",
+  "delivery_date",
   "column_break_trut",
   "invoice_number",
   "trial_date",
-  "store"
+  "store",
+  "style_profiles"
  ],
  "fields": [
-  {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Name"
-  },
   {
    "fieldname": "delivery_date",
    "fieldtype": "Date",
@@ -32,7 +30,10 @@
   {
    "fieldname": "invoice_number",
    "fieldtype": "Data",
-   "label": "Invoice Number"
+   "in_list_view": 1,
+   "label": "Invoice Number",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "trial_date",
@@ -40,6 +41,8 @@
    "label": "Trial Date"
   },
   {
+   "fetch_from": "customer.gender",
+   "fetch_if_empty": 1,
    "fieldname": "gender",
    "fieldtype": "Select",
    "label": "Gender",
@@ -50,11 +53,37 @@
    "fieldtype": "Link",
    "label": "Store",
    "options": "Store"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "HT Customer_details"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fetch_if_empty": 1,
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fetch_from": "customer.phone_number",
+   "fetch_if_empty": 1,
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "style_profiles",
+   "fieldtype": "Table",
+   "label": "style profiles",
+   "options": "Ht Invoice Style Sheet Profile Link"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-10 23:05:20.865429",
+ "modified": "2024-06-29 12:29:01.473795",
  "modified_by": "Administrator",
  "module": "Ht Measurements",
  "name": "HT Invoice",
@@ -76,5 +105,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_seen": 1
 }

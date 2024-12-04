@@ -1,0 +1,66 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Measurements") }}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/css/measurements.css">
+<div class="container mt-5">
+    {% if is_invoice_exists %}
+    <div class="card shadow-lg p-4">
+        <h5 class="card-title text-center">{{ _("Measurements") }}</h5>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge badge-dark badge-pill mr-2">1</span>
+                    {{ _("Shirt") }}
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm mr-2 view-btn" data-type="shirt">{{ _("View") }}</button>
+                    {% if shirt_completed %}
+                        <span class="badge badge-success">✔</span>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge badge-dark badge-pill mr-2">2</span>
+                    {{ _("Trousers") }}
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm mr-2 view-btn" data-type="trousers">{{ _("View") }}</button>
+                    {% if trousers_completed %}
+                        <span class="badge badge-success">✔</span>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" id="go-to-style-sheet">{{ _("Go to Style Sheet") }}</button>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-danger text-center">
+        {{ no_invoice_message }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".view-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            const type = this.getAttribute("data-type");
+            const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+            window.location.href = `/ht_app/${type}_measurement?invoice_number=${invoiceNumber}`;
+        });
+    });
+
+    document.getElementById("go-to-style-sheet").addEventListener("click", function () {
+        const invoiceNumber = new URLSearchParams(window.location.search).get('invoice_number');
+        window.location.href = `/ht_app/style_sheet_profiles?invoice_number=${invoiceNumber}`;
+    });
+});
+</script>
+{% endblock %}
